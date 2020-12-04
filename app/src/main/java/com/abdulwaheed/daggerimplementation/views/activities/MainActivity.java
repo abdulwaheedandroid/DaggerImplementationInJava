@@ -51,17 +51,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activityMainBinding.notifications.setText(mainViewModel.getNotificationText());
+    }
+
     private void setListeners() {
         activityMainBinding.settings.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
     }
 
     private void initInstanceVariables() {
         activityMainBinding.hello.setText(mainViewModel.getWelcomeText());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        activityMainBinding.notifications.setText(mainViewModel.getNotificationText());
     }
 }
