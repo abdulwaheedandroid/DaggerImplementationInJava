@@ -4,7 +4,13 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.abdulwaheed.daggerimplementation.views.fragments.EnterDetailsFragment;
 
+import javax.inject.Inject;
+
 public class EnterDetailsViewModel {
+
+    @Inject
+    public EnterDetailsViewModel() {
+    }
 
     public static final byte MAX_LENGTH = 5;
 

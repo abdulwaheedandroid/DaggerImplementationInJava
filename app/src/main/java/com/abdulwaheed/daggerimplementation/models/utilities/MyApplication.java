@@ -2,7 +2,7 @@ package com.abdulwaheed.daggerimplementation.models.utilities;
 
 import android.app.Application;
 
-import com.abdulwaheed.daggerimplementation.models.di.AppComponents;
+import com.abdulwaheed.daggerimplementation.models.di.components.AppComponents;
 import com.abdulwaheed.daggerimplementation.models.di.DaggerAppComponents;
 import com.abdulwaheed.daggerimplementation.models.repositories.sessions.UserManager;
 import com.abdulwaheed.daggerimplementation.models.repositories.sharedpreferences.SharedPreferenceStorage;

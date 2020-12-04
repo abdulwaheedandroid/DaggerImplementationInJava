@@ -1,9 +1,12 @@
-package com.abdulwaheed.daggerimplementation.models.di;
+package com.abdulwaheed.daggerimplementation.models.di.components;
 
 import android.content.Context;
 
+import com.abdulwaheed.daggerimplementation.models.di.StorageModule;
 import com.abdulwaheed.daggerimplementation.views.activities.MainActivity;
 import com.abdulwaheed.daggerimplementation.views.activities.RegistrationActivity;
+import com.abdulwaheed.daggerimplementation.views.fragments.EnterDetailsFragment;
+import com.abdulwaheed.daggerimplementation.views.fragments.TermsAndConditionsFragment;
 
 import javax.inject.Singleton;
 
@@ -23,4 +26,6 @@ public interface AppComponents {
     //classes that can be injected by this component
     void inject(RegistrationActivity registrationActivity);
     void inject(MainActivity activity);
+    void inject(EnterDetailsFragment enterDetailsFragment);
+    void inject(TermsAndConditionsFragment termsAndConditionsFragment);
 }

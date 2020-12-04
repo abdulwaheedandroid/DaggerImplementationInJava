@@ -1,5 +1,6 @@
 package com.abdulwaheed.daggerimplementation.views.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,12 @@ import androidx.lifecycle.Observer;
 
 import com.abdulwaheed.daggerimplementation.R;
 import com.abdulwaheed.daggerimplementation.databinding.FragmentEnterDetailsBinding;
+import com.abdulwaheed.daggerimplementation.models.utilities.MyApplication;
 import com.abdulwaheed.daggerimplementation.view_models.EnterDetailsViewModel;
 import com.abdulwaheed.daggerimplementation.view_models.RegistrationViewModel;
 import com.abdulwaheed.daggerimplementation.views.activities.RegistrationActivity;
+
+import javax.inject.Inject;
 
 /**
  * RegistrationViewModel is used to set the username and password information (attached to
@@ -29,9 +33,18 @@ import com.abdulwaheed.daggerimplementation.views.activities.RegistrationActivit
 public class EnterDetailsFragment extends Fragment {
 
     private FragmentEnterDetailsBinding fragmentEnterDetailsBinding;
-    private RegistrationViewModel registrationViewModel;
-    private EnterDetailsViewModel enterDetailsViewModel;
 
+    @Inject
+    RegistrationViewModel registrationViewModel;
+    @Inject
+    EnterDetailsViewModel enterDetailsViewModel;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        ((MyApplication) getActivity().getApplication()).getAppComponents().inject(this);
+    }
 
     @Nullable
     @Override
@@ -51,8 +64,7 @@ public class EnterDetailsFragment extends Fragment {
     }
 
     private void initInstanceVariables() {
-        enterDetailsViewModel = new EnterDetailsViewModel();
-        registrationViewModel = ((RegistrationActivity) getActivity()). getRegistrationViewModel();
+
     }
 
     @Override

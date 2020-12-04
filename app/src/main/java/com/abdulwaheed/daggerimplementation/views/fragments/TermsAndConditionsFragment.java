@@ -1,5 +1,6 @@
 package com.abdulwaheed.daggerimplementation.views.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +12,23 @@ import androidx.fragment.app.Fragment;
 
 import com.abdulwaheed.daggerimplementation.R;
 import com.abdulwaheed.daggerimplementation.databinding.FragmentTermsAndConditionsBinding;
+import com.abdulwaheed.daggerimplementation.models.utilities.MyApplication;
 import com.abdulwaheed.daggerimplementation.view_models.RegistrationViewModel;
 import com.abdulwaheed.daggerimplementation.views.activities.RegistrationActivity;
+
+import javax.inject.Inject;
 
 public class TermsAndConditionsFragment extends Fragment {
 
     private FragmentTermsAndConditionsBinding fragmentTermsAndConditionsBinding;
-    private RegistrationViewModel registrationViewModel;
+    @Inject
+    RegistrationViewModel registrationViewModel;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ((MyApplication) getActivity().getApplication()). getAppComponents().inject(this);
+    }
 
     @Nullable
     @Override
@@ -31,7 +42,6 @@ public class TermsAndConditionsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         fragmentTermsAndConditionsBinding = FragmentTermsAndConditionsBinding.bind(view);
-        registrationViewModel = ((RegistrationActivity) getActivity()).getRegistrationViewModel();
 
         fragmentTermsAndConditionsBinding.next.setOnClickListener(v -> {
             registrationViewModel.acceptTermAndConditions();
