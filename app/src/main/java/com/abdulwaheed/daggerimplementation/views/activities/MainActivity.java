@@ -12,9 +12,16 @@ import com.abdulwaheed.daggerimplementation.models.repositories.sessions.UserMan
 import com.abdulwaheed.daggerimplementation.models.utilities.MyApplication;
 import com.abdulwaheed.daggerimplementation.view_models.MainViewModel;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity {
 
-    private MainViewModel mainViewModel;
+    @Inject //@Inject annotated fields will be provided by Dagger
+    MainViewModel mainViewModel;
+
+    @Inject
+    UserManager userManager;
+
     private ActivityMainBinding activityMainBinding;
 
     @Override
@@ -29,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
          * else carry on with MainActivity
          */
 
-        UserManager userManager = ((MyApplication) getApplication()).getUserManager();
         if (!userManager.isUserLoggedIn()) {
             if (!userManager.isUserRegistered()) {
                 startActivity(new Intent(this, RegistrationActivity.class));
@@ -40,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             setContentView(activityMainBinding.getRoot());
-            initInstanceVariables(userManager);
+            initInstanceVariables();
             setListeners();
         }
     }
@@ -49,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.settings.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
     }
 
-    private void initInstanceVariables(UserManager userManager) {
-        mainViewModel = new MainViewModel(userManager.getUserDataRepository());
+    private void initInstanceVariables() {
         activityMainBinding.hello.setText(mainViewModel.getWelcomeText());
     }
 

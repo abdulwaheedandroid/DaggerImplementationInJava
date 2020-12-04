@@ -3,11 +3,14 @@ package com.abdulwaheed.daggerimplementation.models.repositories.sharedpreferenc
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import javax.inject.Inject;
+
 public class SharedPreferenceStorage implements Storage {
 
     private Context context;
     private SharedPreferences sharedPreferences;
 
+    @Inject
     public SharedPreferenceStorage(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);

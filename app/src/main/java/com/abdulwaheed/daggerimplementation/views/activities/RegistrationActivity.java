@@ -19,17 +19,18 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private ActivityRegistrationBinding mActivityRegistrationBinding;
 
-    @Inject
+    @Inject //@Inject annotated fields will be provided by Dagger
     RegistrationViewModel registrationViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //Ask dagger to inject our dependencies
+        ((MyApplication) getApplication()).getAppComponents().inject(this);
         super.onCreate(savedInstanceState);
         //Binding View
         mActivityRegistrationBinding = ActivityRegistrationBinding.inflate(getLayoutInflater());
         setContentView(mActivityRegistrationBinding.getRoot());
 
-        registrationViewModel = new RegistrationViewModel(((MyApplication) getApplication()).getUserManager());
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_holder, new EnterDetailsFragment())
                 .commit();
