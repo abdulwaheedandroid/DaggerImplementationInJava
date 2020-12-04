@@ -5,9 +5,12 @@ import android.content.Context;
 import com.abdulwaheed.daggerimplementation.views.activities.MainActivity;
 import com.abdulwaheed.daggerimplementation.views.activities.RegistrationActivity;
 
+import javax.inject.Singleton;
+
 import dagger.BindsInstance;
 import dagger.Component;
 
+@Singleton
 @Component(modules = StorageModule.class) //Definition of a Dagger component
 public interface AppComponents {
 

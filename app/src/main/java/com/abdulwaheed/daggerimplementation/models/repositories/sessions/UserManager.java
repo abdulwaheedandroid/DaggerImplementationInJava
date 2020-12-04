@@ -4,11 +4,13 @@ package com.abdulwaheed.daggerimplementation.models.repositories.sessions;
 import com.abdulwaheed.daggerimplementation.models.repositories.sharedpreferences.Storage;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Handles User lifecycle. Manages registrations, logs in and logs out.
  * Knows when the user is logged in.
  */
+@Singleton
 public class UserManager {
 
 
