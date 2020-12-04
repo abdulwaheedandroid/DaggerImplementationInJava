@@ -3,6 +3,8 @@ package com.abdulwaheed.daggerimplementation.models.repositories.sessions;
 
 import com.abdulwaheed.daggerimplementation.models.repositories.sharedpreferences.Storage;
 
+import javax.inject.Inject;
+
 /**
  * Handles User lifecycle. Manages registrations, logs in and logs out.
  * Knows when the user is logged in.
@@ -25,6 +27,7 @@ public class UserManager {
 
     private String mUserName;
 
+    @Inject
     public UserManager(Storage storage) {
         this.storage = storage;
         this.mUserName = storage.getString(REGISTERED_USER);

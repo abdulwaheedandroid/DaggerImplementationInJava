@@ -2,10 +2,13 @@ package com.abdulwaheed.daggerimplementation.view_models;
 
 import com.abdulwaheed.daggerimplementation.models.repositories.sessions.UserManager;
 
+import javax.inject.Inject;
+
 public class RegistrationViewModel {
 
     private UserManager userManager;
 
+    @Inject
     public RegistrationViewModel(UserManager userManager) {
         this.userManager = userManager;
     }

@@ -13,10 +13,14 @@ import com.abdulwaheed.daggerimplementation.view_models.RegistrationViewModel;
 import com.abdulwaheed.daggerimplementation.views.fragments.EnterDetailsFragment;
 import com.abdulwaheed.daggerimplementation.views.fragments.TermsAndConditionsFragment;
 
+import javax.inject.Inject;
+
 public class RegistrationActivity extends AppCompatActivity {
 
     private ActivityRegistrationBinding mActivityRegistrationBinding;
-    private RegistrationViewModel registrationViewModel;
+
+    @Inject
+    RegistrationViewModel registrationViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
