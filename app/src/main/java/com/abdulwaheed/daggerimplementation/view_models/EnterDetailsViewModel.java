@@ -1,6 +1,5 @@
 package com.abdulwaheed.daggerimplementation.view_models;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.abdulwaheed.daggerimplementation.views.fragments.EnterDetailsFragment;
