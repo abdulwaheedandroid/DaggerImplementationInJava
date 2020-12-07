@@ -27,7 +27,7 @@ public class TermsAndConditionsFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        ((MyApplication) getActivity().getApplication()). getAppComponents().inject(this);
+        ((RegistrationActivity) getActivity()).registrationComponent.inject(this);
     }
 
     @Nullable

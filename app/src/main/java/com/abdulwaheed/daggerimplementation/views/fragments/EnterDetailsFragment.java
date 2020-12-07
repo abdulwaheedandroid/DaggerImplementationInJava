@@ -43,7 +43,7 @@ public class EnterDetailsFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        ((MyApplication) getActivity().getApplication()).getAppComponents().inject(this);
+        ((RegistrationActivity) getActivity()).registrationComponent.inject(this);
     }
 
     @Nullable

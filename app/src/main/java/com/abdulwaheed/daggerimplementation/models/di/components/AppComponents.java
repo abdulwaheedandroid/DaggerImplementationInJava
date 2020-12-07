@@ -26,9 +26,9 @@ public interface AppComponents {
     RegistrationComponent.Factory registrationComponent();
 
     //classes that can be injected by this component
-    void inject(RegistrationActivity activity);
-    void inject(EnterDetailsFragment fragment);
-    void inject(TermsAndConditionsFragment fragment);
+    //void inject(RegistrationActivity activity);
+  //  void inject(EnterDetailsFragment fragment);
+ //   void inject(TermsAndConditionsFragment fragment);
     void inject(MainActivity activity);
 
 }

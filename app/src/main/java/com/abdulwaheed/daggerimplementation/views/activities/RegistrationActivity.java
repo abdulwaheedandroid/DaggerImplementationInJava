@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.abdulwaheed.daggerimplementation.R;
 import com.abdulwaheed.daggerimplementation.databinding.ActivityRegistrationBinding;
+import com.abdulwaheed.daggerimplementation.models.di.components.RegistrationComponent;
 import com.abdulwaheed.daggerimplementation.models.utilities.MyApplication;
 import com.abdulwaheed.daggerimplementation.view_models.RegistrationViewModel;
 import com.abdulwaheed.daggerimplementation.views.fragments.EnterDetailsFragment;
@@ -22,10 +23,16 @@ public class RegistrationActivity extends AppCompatActivity {
     @Inject //@Inject annotated fields will be provided by Dagger
     RegistrationViewModel registrationViewModel;
 
+    //Stores an instance of RegistrationComponent so that its Fragments can access it
+    public RegistrationComponent registrationComponent;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        //Ask dagger to inject our dependencies
-        ((MyApplication) getApplication()).getAppComponents().inject(this);
+        //Create an instance of Registration component by grabbing the factory from the app graph
+        registrationComponent = ((MyApplication) getApplication()).getAppComponents().registrationComponent().create();
+
+        //Injects this activity to the just created registration component
+        registrationComponent.inject(this);
         super.onCreate(savedInstanceState);
         //Binding View
         mActivityRegistrationBinding = ActivityRegistrationBinding.inflate(getLayoutInflater());

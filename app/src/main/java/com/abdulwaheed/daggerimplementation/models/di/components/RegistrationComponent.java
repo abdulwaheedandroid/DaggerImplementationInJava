@@ -7,6 +7,7 @@ import com.abdulwaheed.daggerimplementation.views.fragments.TermsAndConditionsFr
 import dagger.Subcomponent;
 
 //Definition of a Dagger sub component
+@ActivityScope
 @Subcomponent
 public interface RegistrationComponent {
 

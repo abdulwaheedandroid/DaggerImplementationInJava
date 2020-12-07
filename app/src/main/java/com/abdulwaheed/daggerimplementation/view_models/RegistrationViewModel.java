@@ -1,9 +1,11 @@
 package com.abdulwaheed.daggerimplementation.view_models;
 
+import com.abdulwaheed.daggerimplementation.models.di.components.ActivityScope;
 import com.abdulwaheed.daggerimplementation.models.repositories.sessions.UserManager;
 
 import javax.inject.Inject;
 
+@ActivityScope
 public class RegistrationViewModel {
 
     private UserManager userManager;
