@@ -5,11 +5,14 @@ import androidx.lifecycle.MutableLiveData;
 import com.abdulwaheed.daggerimplementation.models.repositories.sessions.UserManager;
 import com.abdulwaheed.daggerimplementation.models.utilities.AppConstants;
 
+import javax.inject.Inject;
+
 public class LoginViewModel {
 
     private UserManager userManager;
     private MutableLiveData<Byte> loginState = new MutableLiveData<>();
 
+    @Inject
     public LoginViewModel(UserManager userManager) {
         this.userManager = userManager;
     }

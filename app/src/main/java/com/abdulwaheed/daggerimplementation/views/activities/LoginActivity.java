@@ -13,13 +13,22 @@ import com.abdulwaheed.daggerimplementation.models.utilities.AppConstants;
 import com.abdulwaheed.daggerimplementation.models.utilities.MyApplication;
 import com.abdulwaheed.daggerimplementation.view_models.LoginViewModel;
 
+import javax.inject.Inject;
+
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginViewModel mLoginViewModel;
+    @Inject //1) LoginViewModel is provided by the Dagger
+    LoginViewModel mLoginViewModel;
     private ActivityLoginBinding mActivityLoginBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        /*
+        * Creates an instance of Login component by grabbing the factory from
+        * the app graph and injects this activity to that Component
+        * */
+
+        ((MyApplication) getApplication()).getAppComponents().loginComponent().create().inject(this);
         super.onCreate(savedInstanceState);
         //View Binding
         mActivityLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
@@ -63,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initInstanceVariables() {
-        mLoginViewModel = new LoginViewModel(((MyApplication) getApplication()) .getUserManager());
+        //mLoginViewModel = new LoginViewModel(((MyApplication) getApplication()) .getUserManager());
 
     }
 }

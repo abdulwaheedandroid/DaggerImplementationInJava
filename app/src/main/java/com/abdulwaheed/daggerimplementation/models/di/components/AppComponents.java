@@ -24,11 +24,9 @@ public interface AppComponents {
 
     //Expose RegistrationComponent factory from the graph
     RegistrationComponent.Factory registrationComponent();
+    LoginComponent.Factory loginComponent();
 
     //classes that can be injected by this component
-    //void inject(RegistrationActivity activity);
-  //  void inject(EnterDetailsFragment fragment);
- //   void inject(TermsAndConditionsFragment fragment);
     void inject(MainActivity activity);
 
 }
