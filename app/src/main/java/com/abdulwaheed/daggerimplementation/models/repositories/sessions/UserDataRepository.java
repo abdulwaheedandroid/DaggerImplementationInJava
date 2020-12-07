@@ -1,5 +1,7 @@
 package com.abdulwaheed.daggerimplementation.models.repositories.sessions;
 
+import com.abdulwaheed.daggerimplementation.models.di.components.LoggedUserScope;
+
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -7,6 +9,8 @@ import javax.inject.Inject;
 /**
  * UserDataRepository contains user-specific data such as username and unread notifications.
  */
+
+@LoggedUserScope
 public class UserDataRepository {
 
     private UserManager mUserManager;

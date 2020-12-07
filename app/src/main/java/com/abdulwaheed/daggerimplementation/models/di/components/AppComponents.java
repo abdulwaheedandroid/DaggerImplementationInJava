@@ -3,8 +3,10 @@ package com.abdulwaheed.daggerimplementation.models.di.components;
 import android.content.Context;
 
 import com.abdulwaheed.daggerimplementation.models.di.StorageModule;
+import com.abdulwaheed.daggerimplementation.models.repositories.sessions.UserManager;
 import com.abdulwaheed.daggerimplementation.views.activities.MainActivity;
 import com.abdulwaheed.daggerimplementation.views.activities.RegistrationActivity;
+import com.abdulwaheed.daggerimplementation.views.activities.SettingsActivity;
 import com.abdulwaheed.daggerimplementation.views.fragments.EnterDetailsFragment;
 import com.abdulwaheed.daggerimplementation.views.fragments.TermsAndConditionsFragment;
 
@@ -26,7 +28,11 @@ public interface AppComponents {
     RegistrationComponent.Factory registrationComponent();
     LoginComponent.Factory loginComponent();
 
-    //classes that can be injected by this component
-    void inject(MainActivity activity);
+    /*
+    * Expose UserManager so that MainActivity and SettingsActivity can
+    * access a particular instance of UserComponent
+    * */
+
+    UserManager userManager();
 
 }

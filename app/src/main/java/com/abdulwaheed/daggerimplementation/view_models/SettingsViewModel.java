@@ -3,6 +3,8 @@ package com.abdulwaheed.daggerimplementation.view_models;
 import com.abdulwaheed.daggerimplementation.models.repositories.sessions.UserDataRepository;
 import com.abdulwaheed.daggerimplementation.models.repositories.sessions.UserManager;
 
+import javax.inject.Inject;
+
 /**
  * SettingsViewModel is the ViewModel that [SettingsActivity] uses to handle complex logic.
  */
@@ -11,6 +13,7 @@ public class SettingsViewModel {
     private UserDataRepository userDataRepository;
     private UserManager userManager;
 
+    @Inject
     public SettingsViewModel(UserDataRepository userDataRepository, UserManager userManager) {
         this.userDataRepository = userDataRepository;
         this.userManager = userManager;

@@ -11,20 +11,27 @@ import com.abdulwaheed.daggerimplementation.models.repositories.sessions.UserMan
 import com.abdulwaheed.daggerimplementation.models.utilities.MyApplication;
 import com.abdulwaheed.daggerimplementation.view_models.SettingsViewModel;
 
+import javax.inject.Inject;
+
 public class SettingsActivity extends AppCompatActivity {
 
     private ActivitySettingsBinding activitySettingsBinding;
 
-    private SettingsViewModel settingsViewModel;
+    @Inject // 1) SettingViewModel is provided by Dagger
+    SettingsViewModel settingsViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         activitySettingsBinding = ActivitySettingsBinding.inflate(getLayoutInflater());
+        /*
+        * Gets the UserManager from the application graph to obtain the instance
+        * of UserComponent and gets this Activity injected
+        * */
+
+        UserManager userManager = ((MyApplication) getApplication()).getAppComponents().userManager();
+        userManager.getUserComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(activitySettingsBinding.getRoot());
-
-        final UserManager userManager = ((MyApplication) getApplication()).getUserManager();
-        settingsViewModel = new SettingsViewModel(userManager.getUserDataRepository(), userManager);
 
         setListeners();
     }

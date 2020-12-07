@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.abdulwaheed.daggerimplementation.R;
 import com.abdulwaheed.daggerimplementation.databinding.ActivityMainBinding;
+import com.abdulwaheed.daggerimplementation.databinding.ActivitySettingsBinding;
 import com.abdulwaheed.daggerimplementation.models.repositories.sessions.UserManager;
 import com.abdulwaheed.daggerimplementation.models.utilities.MyApplication;
 import com.abdulwaheed.daggerimplementation.view_models.MainViewModel;
@@ -19,15 +20,15 @@ public class MainActivity extends AppCompatActivity {
     @Inject //@Inject annotated fields will be provided by Dagger
     MainViewModel mainViewModel;
 
-    @Inject
-    UserManager userManager;
-
     private ActivityMainBinding activityMainBinding;
+    private ActivitySettingsBinding activitySettingsBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        activitySettingsBinding = ActivitySettingsBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
+        setContentView(activitySettingsBinding.getRoot());
 
 
         /**
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
          * If the User is not logged in, LoginActivity will be launched,
          * else carry on with MainActivity
          */
+
+        UserManager userManager = ((MyApplication) getApplication()).getAppComponents().userManager();
 
         if (!userManager.isUserLoggedIn()) {
             if (!userManager.isUserRegistered()) {
@@ -46,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             setContentView(activityMainBinding.getRoot());
+            /*
+            * If the MainActivity needs to be displayed, we get the UserComponent
+            * from the application graph and gets this Activity injected
+            * */
+            userManager.getUserComponent().inject(this);
             initInstanceVariables();
             setListeners();
         }

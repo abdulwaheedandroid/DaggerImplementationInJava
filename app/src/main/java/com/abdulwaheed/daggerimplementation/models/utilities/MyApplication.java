@@ -13,17 +13,6 @@ public class MyApplication extends Application {
 
     private AppComponents appComponents =  DaggerAppComponents.factory().create(this);
 
-    private UserManager userManager;
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        userManager = new UserManager(new SharedPreferenceStorage(getApplicationContext()));
-    }
-
-    public UserManager getUserManager(){
-        return userManager;
-    }
 
     public AppComponents getAppComponents() {
         return appComponents;

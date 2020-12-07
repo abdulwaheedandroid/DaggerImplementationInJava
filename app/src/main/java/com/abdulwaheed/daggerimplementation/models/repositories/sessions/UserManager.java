@@ -1,6 +1,7 @@
 package com.abdulwaheed.daggerimplementation.models.repositories.sessions;
 
 
+import com.abdulwaheed.daggerimplementation.models.di.components.UserComponent;
 import com.abdulwaheed.daggerimplementation.models.repositories.sharedpreferences.Storage;
 
 import javax.inject.Inject;
@@ -19,18 +20,20 @@ public class UserManager {
 
     private Storage storage;
 
-    /**
-     *  UserDataRepository is specific to a logged in user. This determines if the user
-     *  is logged in or not, when the user logs in, a new instance will be created.
-     *  When the user logs out, this will be null.
-     */
-
-    private UserDataRepository mUserDataRepository;
-
     private String mUserName;
 
+    private UserComponent.Factory userComponentFactory;
+
+    private UserComponent userComponent;
+
     @Inject
-    public UserManager(Storage storage) {
+    public UserManager(Storage storage,
+            /*
+             * Since UserManager will be in charge od managing the UserCOmponent lifecycle,
+             * it needs to know how to create instances of it.
+             * */
+        UserComponent.Factory factory) {
+        this.userComponentFactory = factory;
         this.storage = storage;
         this.mUserName = storage.getString(REGISTERED_USER);
     }
@@ -40,7 +43,7 @@ public class UserManager {
     }
 
     public boolean isUserLoggedIn() {
-        return mUserDataRepository != null;
+        return userComponent != null;
     }
 
     public boolean isUserRegistered() {
@@ -49,7 +52,7 @@ public class UserManager {
 
     public void registerUser(final String userName, final String password) {
         storage.setString(REGISTERED_USER, userName);
-        storage.setString(userName + PASSWORD_SUFFIX , password);
+        storage.setString(userName + PASSWORD_SUFFIX, password);
         userJustLoggedIn();
     }
 
@@ -65,10 +68,10 @@ public class UserManager {
     }
 
     public void logout() {
-        mUserDataRepository = null;
+        userComponent = null;
     }
 
-    public void unRegister () {
+    public void unRegister() {
         final String userName = storage.getString(REGISTERED_USER);
         storage.setString(REGISTERED_USER, "");
         storage.setString(userName + PASSWORD_SUFFIX, "");
@@ -76,10 +79,14 @@ public class UserManager {
     }
 
     public void userJustLoggedIn() {
-        mUserDataRepository = new UserDataRepository(this);
+        userComponent = userComponentFactory.create();
     }
 
-    public UserDataRepository getUserDataRepository () {
-        return mUserDataRepository;
+    public void setUserComponent(UserComponent userComponent) {
+        this.userComponent = userComponent;
+    }
+
+    public UserComponent getUserComponent() {
+        return userComponent;
     }
 }
